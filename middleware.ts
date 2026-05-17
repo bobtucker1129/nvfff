@@ -1,12 +1,8 @@
 import { type NextRequest, NextResponse } from 'next/server'
 
-export async function middleware(request: NextRequest) {
-  // Skip Supabase session refresh until env vars are configured
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
-    return NextResponse.next()
-  }
-  const { updateSession } = await import('@/utils/supabase/middleware')
-  return updateSession(request)
+// Passthrough middleware — Supabase session refresh wired in once auth is live
+export function middleware(_request: NextRequest) {
+  return NextResponse.next()
 }
 
 export const config = {
