@@ -164,7 +164,7 @@ export default function HoneyHolesPage() {
             >
               + Upload a Catch
             </button>
-            <input ref={fileRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={handleFileChange} />
+            <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
           </div>
           <div className="flex gap-1">
             {(['all', 'mine', 'public'] as Filter[]).map(f => (
