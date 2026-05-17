@@ -64,16 +64,16 @@ export default function GearPage() {
 
   return (
     <div className="p-4 sm:p-6 max-w-6xl mx-auto">
-      <div className="mb-6">
+      <div className="mb-8">
         <h1 className="font-serif text-3xl font-bold text-stone-100">My Gear</h1>
         <p className="text-stone-400 text-sm mt-1">Your rods, reels, and kit — all in one place.</p>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 mb-6 bg-stone-900 border border-stone-700 rounded-lg p-1 w-fit">
+      <div className="flex gap-1 mb-8 bg-stone-900 border border-stone-700 rounded-lg p-1 w-fit">
         {(['rods', 'reels', 'gear'] as Tab[]).map(tab => (
           <button key={tab} onClick={() => setActiveTab(tab)}
-            className={`px-5 py-1.5 rounded-md text-sm font-medium transition-colors capitalize ${activeTab === tab ? 'bg-green-700 text-white' : 'text-stone-400 hover:text-stone-200'}`}>
+            className={`px-5 py-1.5 rounded-md text-sm font-medium transition-colors capitalize ${activeTab === tab ? 'bg-green-700 text-stone-100' : 'text-stone-400 hover:text-stone-200'}`}>
             {tab}
           </button>
         ))}
@@ -160,7 +160,7 @@ export default function GearPage() {
 
       {/* Edit modal */}
       {draft && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/70 p-4">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-stone-950/80 p-4">
           <div className="bg-stone-900 border border-stone-700 rounded-xl w-full max-w-md shadow-2xl">
             <div className="p-5 border-b border-stone-700 flex items-center justify-between">
               <h2 className="font-serif text-lg font-bold text-stone-100">Edit {draft.id}</h2>
@@ -220,7 +220,7 @@ export default function GearPage() {
             </div>
             <div className="p-5 border-t border-stone-700 flex gap-3">
               <button onClick={cancelEdit} className="flex-1 py-2 bg-stone-800 hover:bg-stone-700 text-stone-300 text-sm rounded transition-colors">Cancel</button>
-              <button onClick={saveEdit} className="flex-1 py-2 bg-green-700 hover:bg-green-600 text-white text-sm font-medium rounded transition-colors">Save</button>
+              <button onClick={saveEdit} className="flex-1 py-2 bg-green-700 hover:bg-green-600 text-stone-100 text-sm font-medium rounded transition-colors">Save</button>
             </div>
           </div>
         </div>

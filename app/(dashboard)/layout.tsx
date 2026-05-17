@@ -41,20 +41,20 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const initial = userName ? userName.charAt(0).toUpperCase() : '?'
 
   return (
-    <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col">
+    <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col font-sans">
       {/* Top bar */}
       <header className="bg-stone-900 border-b border-stone-800 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
           <Link href="/" className="font-serif font-bold text-green-500 hover:text-green-400 transition-colors">
             <span className="text-xl sm:hidden">NVFFF</span>
-            <span className="hidden sm:block text-lg">Northern Virginia Fly Fishing Fanatics</span>
+            <span className="hidden sm:block text-lg tracking-tight">Northern Virginia Fly Fishing Fanatics</span>
           </Link>
 
           {/* Avatar + dropdown */}
           <div className="relative" ref={menuRef}>
             <button
               onClick={() => setMenuOpen(o => !o)}
-              className="w-8 h-8 rounded-full bg-green-700 hover:bg-green-600 flex items-center justify-center text-white text-sm font-bold transition-colors"
+              className="w-8 h-8 rounded-full bg-green-700 hover:bg-green-600 flex items-center justify-center text-stone-100 text-sm font-bold transition-colors"
               title={userName || 'Account'}
             >
               {initial}
@@ -86,10 +86,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           ← Home
         </Link>
         <Link href="/gear" className="flex-1 text-center py-3 text-sm font-medium text-stone-300 hover:text-green-400 hover:bg-stone-800 transition-colors">
-          🎣 My Gear
+          My Gear
         </Link>
         <Link href="/honey-holes" className="flex-1 text-center py-3 text-sm font-medium text-stone-300 hover:text-green-400 hover:bg-stone-800 transition-colors border-l border-stone-800">
-          📍 Honey Holes
+          Honey Holes
         </Link>
       </nav>
 
@@ -97,7 +97,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         {/* Desktop sidebar */}
         <aside className="w-56 bg-stone-900/60 border-r border-stone-800 shrink-0 hidden md:flex md:flex-col">
           <nav className="p-4 space-y-1 pt-6 flex-1">
-            <p className="text-stone-500 text-xs uppercase tracking-widest font-medium px-3 pb-3">My Stuff</p>
+            <p className="text-stone-500 text-[11px] uppercase tracking-[0.15em] font-semibold px-3 pb-3">My Stuff</p>
             <Link href="/gear" className="flex items-center gap-2 px-3 py-2 rounded-lg text-stone-300 hover:text-green-400 hover:bg-stone-800 transition-colors text-sm font-medium">
               My Gear
             </Link>

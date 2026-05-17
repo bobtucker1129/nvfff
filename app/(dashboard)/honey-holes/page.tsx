@@ -78,7 +78,6 @@ export default function HoneyHolesPage() {
     setNotes('')
     setIsPublic(false)
     setUploadError('')
-    // Reset file input so same file can be re-selected
     e.target.value = ''
   }
 
@@ -92,7 +91,6 @@ export default function HoneyHolesPage() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) throw new Error('Not logged in')
 
-      // Upload photo to Supabase Storage
       const ext = pending.file.name.split('.').pop() ?? 'jpg'
       const path = `${user.id}/${Date.now()}.${ext}`
       const { error: uploadErr } = await supabase.storage
@@ -102,7 +100,6 @@ export default function HoneyHolesPage() {
 
       const { data: urlData } = supabase.storage.from('catch-photos').getPublicUrl(path)
 
-      // Insert catch record
       const { error: dbErr } = await supabase.from('catches').insert({
         user_id: user.id,
         lat: pending.lat,
@@ -114,7 +111,6 @@ export default function HoneyHolesPage() {
       })
       if (dbErr) throw dbErr
 
-      // Add pin to local map
       const newSpot: Spot = {
         id: `new-${Date.now()}`,
         name: species ? `${species} catch` : 'New catch',
@@ -128,7 +124,6 @@ export default function HoneyHolesPage() {
       setPending(null)
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err)
-      // If storage bucket doesn't exist yet, show friendly message
       if (msg.includes('Bucket not found') || msg.includes('bucket')) {
         setUploadError('Storage not set up yet — ask your admin to create the "catch-photos" bucket in Supabase.')
       } else {
@@ -160,7 +155,7 @@ export default function HoneyHolesPage() {
             <h1 className="font-serif text-xl font-bold text-stone-100">Honey Holes</h1>
             <button
               onClick={() => fileRef.current?.click()}
-              className="bg-green-700 hover:bg-green-600 text-white text-xs font-medium px-3 py-1.5 rounded transition-colors"
+              className="bg-green-700 hover:bg-green-600 text-stone-100 text-xs font-medium px-3 py-1.5 rounded transition-colors"
             >
               + Upload a Catch
             </button>
@@ -169,7 +164,7 @@ export default function HoneyHolesPage() {
           <div className="flex gap-1">
             {(['all', 'mine', 'public'] as Filter[]).map(f => (
               <button key={f} onClick={() => setFilter(f)}
-                className={`flex-1 py-1 text-xs font-medium rounded transition-colors ${filter === f ? 'bg-green-700 text-white' : 'bg-stone-800 text-stone-400 hover:text-stone-200'}`}>
+                className={`flex-1 py-1 text-xs font-medium rounded transition-colors ${filter === f ? 'bg-green-700 text-stone-100' : 'bg-stone-800 text-stone-400 hover:text-stone-200'}`}>
                 {f === 'all' ? 'All' : f === 'mine' ? 'My Spots' : 'Public'}
               </button>
             ))}
@@ -194,9 +189,8 @@ export default function HoneyHolesPage() {
 
       {/* ── UPLOAD MODAL ── */}
       {pending && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/70 p-4">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-stone-950/80 p-4">
           <div className="bg-stone-900 border border-stone-700 rounded-xl w-full max-w-sm shadow-2xl overflow-hidden">
-            {/* Photo preview */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={pending.previewUrl} alt="Catch preview" className="w-full h-48 object-cover" />
 
@@ -227,7 +221,7 @@ export default function HoneyHolesPage() {
 
               <div className="flex items-center gap-3">
                 <button onClick={() => setIsPublic(p => !p)}
-                  className={`flex-1 py-2 text-sm font-medium rounded transition-colors ${isPublic ? 'bg-green-700 text-white' : 'bg-stone-800 text-stone-400'}`}>
+                  className={`flex-1 py-2 text-sm font-medium rounded transition-colors ${isPublic ? 'bg-green-700 text-stone-100' : 'bg-stone-800 text-stone-400'}`}>
                   {isPublic ? '🌍 Public' : '🔒 Private'}
                 </button>
                 <span className="text-stone-500 text-xs">{isPublic ? 'Visible to all members' : 'Only you can see this'}</span>
@@ -242,7 +236,7 @@ export default function HoneyHolesPage() {
                 <button
                   onClick={handleSubmitCatch}
                   disabled={uploading || pending.gpsError}
-                  className="flex-1 py-2 bg-green-700 hover:bg-green-600 disabled:bg-stone-700 disabled:text-stone-500 text-white text-sm font-medium rounded transition-colors"
+                  className="flex-1 py-2 bg-green-700 hover:bg-green-600 disabled:bg-stone-700 disabled:text-stone-500 text-stone-100 text-sm font-medium rounded transition-colors"
                 >
                   {uploading ? 'Saving...' : 'Save Catch'}
                 </button>

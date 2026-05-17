@@ -5,18 +5,81 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 231, 229, 228;
-  --background-start-rgb: 12, 10, 9;
-  --background-end-rgb: 12, 10, 9;
+  /* Warm stone palette — tinted toward green, never pure gray or pure black */
+  --color-bg: #121110;
+  --color-surface: #1a1917;
+  --color-surface-raised: #242320;
+  --color-border: #2d2a26;
+  --color-border-hover: #3a3630;
+  --color-text: #e7e5e4;
+  --color-text-secondary: #a8a094;
+  --color-text-muted: #6b6359;
+  --color-green: #2d5a3d;
+  --color-green-bright: #3a7a4f;
+  --color-green-muted: #1a3d28;
+  --color-amber: #c4953a;
+  --color-amber-muted: #8a6b2a;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-start-rgb));
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-hover);
+}
+
+/* Selection color */
+::selection {
+  background: var(--color-green);
+  color: var(--color-text);
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--color-green-bright);
+  outline-offset: 2px;
 }
 
 /* Ensure leaflet containers have a defined height */
 .leaflet-container {
   width: 100%;
   height: 100%;
+}
+
+/* Leaflet popup styling to match theme */
+.leaflet-popup-content-wrapper {
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.leaflet-popup-tip {
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  color: var(--color-text-muted);
+}
+
+.leaflet-container a.leaflet-popup-close-button:hover {
+  color: var(--color-text);
 }
