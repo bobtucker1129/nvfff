@@ -1,16 +1,39 @@
 'use client'
 
 import Link from 'next/link'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { createClient } from '@/utils/supabase/client'
 
 export default function LoginPage() {
+  const router = useRouter()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+
+    const supabase = createClient()
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
+
+    if (error) {
+      setError(error.message)
+      setLoading(false)
+      return
+    }
+
+    router.push('/gear')
+    router.refresh()
+  }
+
   return (
     <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col">
-      {/* Mini nav */}
       <header className="border-b border-stone-800 px-4 py-4">
-        <Link
-          href="/"
-          className="font-serif text-xl font-bold text-green-500 hover:text-green-400 transition-colors"
-        >
+        <Link href="/" className="font-serif text-xl font-bold text-green-500 hover:text-green-400 transition-colors">
           NVFFF
         </Link>
       </header>
@@ -18,67 +41,38 @@ export default function LoginPage() {
       <main className="flex-1 flex items-center justify-center px-4 py-16">
         <div className="w-full max-w-md">
           <div className="bg-stone-900 border border-stone-700 rounded-xl p-8 shadow-2xl">
-            <h1 className="font-serif text-3xl font-bold text-stone-100 mb-1">
-              Sign In
-            </h1>
-            <p className="text-stone-400 text-sm mb-8">
-              Welcome back to the crew.
-            </p>
+            <h1 className="font-serif text-3xl font-bold text-stone-100 mb-1">Sign In</h1>
+            <p className="text-stone-400 text-sm mb-8">Welcome back to the crew.</p>
 
-            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-5" onSubmit={handleSubmit}>
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-stone-300 mb-1.5"
-                >
-                  Email
-                </label>
+                <label htmlFor="email" className="block text-sm font-medium text-stone-300 mb-1.5">Email</label>
                 <input
-                  id="email"
-                  type="email"
-                  autoComplete="email"
-                  placeholder="you@example.com"
+                  id="email" type="email" autoComplete="email" placeholder="you@example.com" required
+                  value={email} onChange={e => setEmail(e.target.value)}
                   className="w-full bg-stone-800 border border-stone-600 rounded-lg px-4 py-2.5 text-stone-100 placeholder-stone-500 focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition-colors"
                 />
               </div>
-
               <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-stone-300 mb-1.5"
-                >
-                  Password
-                </label>
+                <label htmlFor="password" className="block text-sm font-medium text-stone-300 mb-1.5">Password</label>
                 <input
-                  id="password"
-                  type="password"
-                  autoComplete="current-password"
-                  placeholder="••••••••"
+                  id="password" type="password" autoComplete="current-password" placeholder="••••••••" required
+                  value={password} onChange={e => setPassword(e.target.value)}
                   className="w-full bg-stone-800 border border-stone-600 rounded-lg px-4 py-2.5 text-stone-100 placeholder-stone-500 focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 transition-colors"
                 />
               </div>
-
+              {error && <p className="text-red-400 text-sm">{error}</p>}
               <button
-                type="submit"
-                disabled
-                className="w-full bg-stone-700 text-stone-400 font-semibold py-3 rounded-lg cursor-not-allowed flex items-center justify-center gap-2"
-                title="Supabase not yet configured"
+                type="submit" disabled={loading}
+                className="w-full bg-green-700 hover:bg-green-600 disabled:bg-stone-700 disabled:text-stone-400 text-white font-semibold py-3 rounded-lg transition-colors"
               >
-                <span>Sign In</span>
-                <span className="text-xs font-normal text-stone-500">
-                  — Coming soon (Supabase setup required)
-                </span>
+                {loading ? 'Signing in...' : 'Sign In'}
               </button>
             </form>
 
             <p className="mt-6 text-center text-sm text-stone-500">
               Don&apos;t have an account?{' '}
-              <Link
-                href="/signup"
-                className="text-green-500 hover:text-green-400 font-medium transition-colors"
-              >
-                Join the Fanatics
-              </Link>
+              <Link href="/signup" className="text-green-500 hover:text-green-400 font-medium transition-colors">Join the Fanatics</Link>
             </p>
           </div>
         </div>
