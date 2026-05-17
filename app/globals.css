@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 :root {
-  /* Warm stone palette — tinted toward green, never pure gray or pure black */
+  /* Dark theme (default) */
   --color-bg: #121110;
   --color-surface: #1a1917;
   --color-surface-raised: #242320;
@@ -21,12 +21,30 @@
   --color-amber-muted: #8a6b2a;
 }
 
+html.light {
+  /* Light theme */
+  --color-bg: #f5f3ef;
+  --color-surface: #ffffff;
+  --color-surface-raised: #faf9f7;
+  --color-border: #e2ded8;
+  --color-border-hover: #c9c3ba;
+  --color-text: #1a1917;
+  --color-text-secondary: #4a4540;
+  --color-text-muted: #8a8174;
+  --color-green: #2d5a3d;
+  --color-green-bright: #3a7a4f;
+  --color-green-muted: #e8f5e9;
+  --color-amber: #b8860b;
+  --color-amber-muted: #d4a84b;
+}
+
 body {
   color: var(--color-text);
   background: var(--color-bg);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Custom scrollbar for webkit browsers */
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -45,13 +63,11 @@ body {
   background: var(--color-border-hover);
 }
 
-/* Selection color */
 ::selection {
   background: var(--color-green);
   color: var(--color-text);
 }
 
-/* Focus styles */
 *:focus-visible {
   outline: 2px solid var(--color-green-bright);
   outline-offset: 2px;
@@ -63,7 +79,7 @@ body {
   height: 100%;
 }
 
-/* Leaflet popup styling to match theme */
+/* Leaflet popup styling */
 .leaflet-popup-content-wrapper {
   background: var(--color-surface-raised);
   color: var(--color-text);
