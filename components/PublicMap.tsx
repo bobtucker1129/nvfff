@@ -1,10 +1,9 @@
 'use client'
 
 import { useEffect } from 'react'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, LayersControl } from 'react-leaflet'
 import L from 'leaflet'
 
-// Fix default marker icon paths broken by webpack
 const fixLeafletIcons = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   delete (L.Icon.Default.prototype as any)._getIconUrl
@@ -24,48 +23,42 @@ interface PublicPin {
 }
 
 const PUBLIC_PINS: PublicPin[] = [
-  {
-    name: 'Shenandoah Bend',
-    lat: 38.8991,
-    lng: -78.1705,
-    catches: 2,
-    lastCatch: 'Brown trout, 14"',
-  },
-  {
-    name: 'Gooney Creek Access',
-    lat: 38.9284,
-    lng: -78.04,
-    catches: 1,
-    lastCatch: 'Brook trout, 9"',
-  },
-  {
-    name: 'Overall Run Falls',
-    lat: 38.8217,
-    lng: -78.285,
-    catches: 4,
-    lastCatch: 'Rainbow, 18"',
-  },
+  { name: 'Shenandoah Bend', lat: 38.8991, lng: -78.1705, catches: 2, lastCatch: 'Brown trout, 14"' },
+  { name: 'Gooney Creek Access', lat: 38.9284, lng: -78.04, catches: 1, lastCatch: 'Brook trout, 9"' },
+  { name: 'Overall Run Falls', lat: 38.8217, lng: -78.285, catches: 4, lastCatch: 'Rainbow, 18"' },
 ]
 
-// Virginia center
 const VA_CENTER: [number, number] = [37.4316, -78.6569]
 
 export default function PublicMap() {
-  useEffect(() => {
-    fixLeafletIcons()
-  }, [])
+  useEffect(() => { fixLeafletIcons() }, [])
 
   return (
-    <MapContainer
-      center={VA_CENTER}
-      zoom={7}
-      style={{ height: '100%', width: '100%' }}
-      className="z-0"
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+    <MapContainer center={VA_CENTER} zoom={7} style={{ height: '100%', width: '100%' }} className="z-0">
+      <LayersControl position="topright">
+        <LayersControl.BaseLayer checked name="Topo (USGS)">
+          <TileLayer
+            url="https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}"
+            attribution='<a href="https://www.usgs.gov/">USGS</a>'
+            maxZoom={16}
+          />
+        </LayersControl.BaseLayer>
+        <LayersControl.BaseLayer name="Satellite">
+          <TileLayer
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+            attribution='Tiles &copy; Esri'
+            maxZoom={18}
+          />
+        </LayersControl.BaseLayer>
+        <LayersControl.BaseLayer name="Street">
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            maxZoom={19}
+          />
+        </LayersControl.BaseLayer>
+      </LayersControl>
+
       {PUBLIC_PINS.map((pin) => (
         <Marker key={pin.name} position={[pin.lat, pin.lng]}>
           <Popup>
