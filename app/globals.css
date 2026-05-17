@@ -5,24 +5,7 @@
 @tailwind utilities;
 
 :root {
-  /* Dark theme (default) */
-  --color-bg: #121110;
-  --color-surface: #1a1917;
-  --color-surface-raised: #242320;
-  --color-border: #2d2a26;
-  --color-border-hover: #3a3630;
-  --color-text: #e7e5e4;
-  --color-text-secondary: #a8a094;
-  --color-text-muted: #6b6359;
-  --color-green: #2d5a3d;
-  --color-green-bright: #3a7a4f;
-  --color-green-muted: #1a3d28;
-  --color-amber: #c4953a;
-  --color-amber-muted: #8a6b2a;
-}
-
-html.light {
-  /* Light theme */
+  /* Light theme only */
   --color-bg: #f5f3ef;
   --color-surface: #ffffff;
   --color-surface-raised: #faf9f7;
@@ -41,7 +24,6 @@ html.light {
 body {
   color: var(--color-text);
   background: var(--color-bg);
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Custom scrollbar */
@@ -65,7 +47,7 @@ body {
 
 ::selection {
   background: var(--color-green);
-  color: var(--color-text);
+  color: white;
 }
 
 *:focus-visible {
