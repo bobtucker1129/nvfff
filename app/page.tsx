@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import Image from 'next/image'
 import ThemeToggle from '@/components/ThemeToggle'
 
 const PublicMap = dynamic(() => import('@/components/PublicMap'), {
@@ -26,22 +27,13 @@ export default function HomePage() {
             </span>
           </div>
           <nav className="flex items-center gap-6 text-sm">
-            <Link
-              href="/"
-              className="text-stone-600 dark:text-stone-300 hover:text-green-700 dark:hover:text-green-400 transition-colors duration-200"
-            >
+            <Link href="/" className="text-stone-600 dark:text-stone-300 hover:text-green-700 dark:hover:text-green-400 transition-colors duration-200">
               Home
             </Link>
-            <a
-              href="#the-map"
-              className="text-stone-600 dark:text-stone-300 hover:text-green-700 dark:hover:text-green-400 transition-colors duration-200"
-            >
+            <a href="#the-map" className="text-stone-600 dark:text-stone-300 hover:text-green-700 dark:hover:text-green-400 transition-colors duration-200">
               The Map
             </a>
-            <Link
-              href="/login"
-              className="bg-green-700 hover:bg-green-600 text-white px-4 py-1.5 rounded text-sm font-medium transition-all duration-200 hover:shadow-lg hover:shadow-green-900/20"
-            >
+            <Link href="/login" className="bg-green-700 hover:bg-green-600 text-white px-4 py-1.5 rounded text-sm font-medium transition-all duration-200 hover:shadow-lg hover:shadow-green-900/20">
               Join the Fanatics
             </Link>
             <ThemeToggle />
@@ -50,90 +42,109 @@ export default function HomePage() {
       </header>
 
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden">
-        {/* Nature-inspired gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-[#f5f3ef] to-amber-50 dark:from-stone-950 dark:via-stone-950 dark:to-stone-900 transition-colors duration-300" aria-hidden="true" />
-        
-        {/* Subtle water texture */}
-        <div
-          className="absolute inset-0 opacity-[0.04] dark:opacity-[0.03]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23000000' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E")`,
-          }}
-          aria-hidden="true"
-        />
+      <section className="relative overflow-hidden min-h-[80vh] flex items-center">
+        {/* Background image with overlay */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/optimized/AdobeStock_221837860-1920.jpg"
+            alt="Autumn sunrise on a river"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/40 dark:from-stone-950/95 dark:via-stone-950/80 dark:to-stone-950/40 transition-colors duration-300" />
+        </div>
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Text content */}
-            <div>
-              <p className="text-green-700 dark:text-green-500 text-sm font-medium tracking-[0.2em] uppercase mb-6">
-                Est. Northern Virginia
-              </p>
-              <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-stone-900 dark:text-stone-100 leading-[1.05] mb-8">
-                Cold Water.<br />
-                <span className="text-amber-600 dark:text-amber-500 italic">Cold Beer.</span><br />
-                Good Company.
-              </h1>
-              <p className="text-stone-600 dark:text-stone-400 text-lg sm:text-xl mb-12 leading-relaxed max-w-lg">
-                Northern Virginia&apos;s fly fishing collective. We log catches, share spots, and argue about flies.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/login"
-                  className="inline-block bg-green-700 hover:bg-green-600 text-white font-semibold px-8 py-3.5 rounded transition-all duration-200 hover:shadow-lg hover:shadow-green-900/30 text-center"
-                >
-                  Join the Fanatics
-                </Link>
-                <a
-                  href="#the-map"
-                  className="inline-block border border-stone-300 dark:border-stone-600 hover:border-green-600 text-stone-700 dark:text-stone-300 hover:text-green-700 dark:hover:text-green-400 font-semibold px-8 py-3.5 rounded transition-all duration-200 hover:bg-stone-100 dark:hover:bg-stone-900/50 text-center"
-                >
-                  See the Map
-                </a>
-              </div>
-            </div>
-
-            {/* Hero image placeholder */}
-            <div className="relative hidden lg:block">
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-green-100 to-amber-100 dark:from-green-900/20 dark:to-amber-900/20 border border-stone-200 dark:border-stone-700 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="text-6xl mb-4">🎣</div>
-                  <p className="text-stone-500 dark:text-stone-400 text-sm">Trout photo coming soon</p>
-                  <p className="text-stone-400 dark:text-stone-500 text-xs mt-2">Add your catch photos to see them here</p>
-                </div>
-              </div>
-              {/* Decorative elements */}
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-green-200 dark:bg-green-800/30 rounded-full blur-2xl" aria-hidden="true" />
-              <div className="absolute -top-4 -left-4 w-32 h-32 bg-amber-200 dark:bg-amber-800/20 rounded-full blur-3xl" aria-hidden="true" />
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+          <div className="max-w-2xl">
+            <p className="text-green-700 dark:text-green-500 text-sm font-medium tracking-[0.2em] uppercase mb-6">
+              Est. Northern Virginia
+            </p>
+            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-stone-900 dark:text-stone-100 leading-[1.05] mb-8">
+              Cold Water.<br />
+              <span className="text-amber-600 dark:text-amber-500 italic">Cold Beer.</span><br />
+              Good Company.
+            </h1>
+            <p className="text-stone-700 dark:text-stone-300 text-lg sm:text-xl mb-12 leading-relaxed max-w-lg">
+              Northern Virginia&apos;s fly fishing collective. We log catches, share spots, and argue about flies.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/login" className="inline-block bg-green-700 hover:bg-green-600 text-white font-semibold px-8 py-3.5 rounded transition-all duration-200 hover:shadow-lg hover:shadow-green-900/30 text-center">
+                Join the Fanatics
+              </Link>
+              <a href="#the-map" className="inline-block bg-white/80 dark:bg-stone-800/80 backdrop-blur border border-stone-300 dark:border-stone-600 hover:border-green-600 text-stone-800 dark:text-stone-200 hover:text-green-700 dark:hover:text-green-400 font-semibold px-8 py-3.5 rounded transition-all duration-200 text-center">
+                See the Map
+              </a>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── STATS BAR ── */}
-      <section className="border-y border-stone-200 dark:border-stone-800 bg-white/50 dark:bg-stone-900/20 transition-colors duration-300">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <section className="border-y border-stone-200 dark:border-stone-800 bg-white/80 dark:bg-stone-900/50 backdrop-blur transition-colors duration-300">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="font-serif text-3xl font-bold text-amber-600 dark:text-amber-500">47</div>
-              <div className="text-stone-500 text-xs uppercase tracking-wider mt-1">Members</div>
+              <div className="font-serif text-4xl font-bold text-amber-600 dark:text-amber-500">47</div>
+              <div className="text-stone-500 text-xs uppercase tracking-wider mt-2">Members</div>
             </div>
             <div className="text-center">
-              <div className="font-serif text-3xl font-bold text-green-700 dark:text-green-500">128</div>
-              <div className="text-stone-500 text-xs uppercase tracking-wider mt-1">Catches Logged</div>
+              <div className="font-serif text-4xl font-bold text-green-700 dark:text-green-500">128</div>
+              <div className="text-stone-500 text-xs uppercase tracking-wider mt-2">Catches Logged</div>
             </div>
             <div className="text-center">
-              <div className="font-serif text-3xl font-bold text-stone-700 dark:text-stone-300">12</div>
-              <div className="text-stone-500 text-xs uppercase tracking-wider mt-1">Rivers Mapped</div>
+              <div className="font-serif text-4xl font-bold text-stone-700 dark:text-stone-300">12</div>
+              <div className="text-stone-500 text-xs uppercase tracking-wider mt-2">Rivers Mapped</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FEATURED CATCH ── */}
+      <section className="py-20 bg-white dark:bg-stone-950 transition-colors duration-300">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+              <Image
+                src="/images/optimized/AdobeStock_247260614-1200.jpg"
+                alt="Rainbow trout caught on a mountain river"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div>
+              <p className="text-green-700 dark:text-green-500 text-sm font-medium tracking-[0.2em] uppercase mb-4">Featured Catch</p>
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-stone-900 dark:text-stone-100 mb-4">
+                Winter Rainbow on the Thornton
+              </h2>
+              <p className="text-stone-600 dark:text-stone-400 text-lg leading-relaxed mb-6">
+                Beautiful 16-inch rainbow caught on a size 18 Adams during a late February hatch. 
+                Water temp was 42°F and the fish took aggressively on the third drift.
+              </p>
+              <div className="flex items-center gap-4 text-sm text-stone-500">
+                <span>Caught by: Mike R.</span>
+                <span>•</span>
+                <span>Feb 14, 2026</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── MISSION ── */}
-      <section className="py-28 bg-white dark:bg-stone-950 transition-colors duration-300">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-28 relative overflow-hidden">
+        {/* Subtle background image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/optimized/AdobeStock_110154202-1920.jpg"
+            alt="Fly fisherman in river"
+            fill
+            className="object-cover opacity-10 dark:opacity-5"
+          />
+          <div className="absolute inset-0 bg-[#f5f3ef] dark:bg-stone-950 transition-colors duration-300" />
+        </div>
+        
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative pl-10">
             <span className="absolute left-0 top-0 text-green-600/40 dark:text-green-700/60 text-6xl font-serif leading-none select-none" aria-hidden="true">
               &ldquo;
@@ -174,19 +185,53 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── GALLERY PREVIEW ── */}
+      <section className="py-20 bg-white dark:bg-stone-950 transition-colors duration-300">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-stone-900 dark:text-stone-100 mb-3">
+              From the Water
+            </h2>
+            <p className="text-stone-600 dark:text-stone-400 text-lg">
+              Moments from our crew
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="aspect-square relative rounded-xl overflow-hidden">
+              <Image src="/images/optimized/AdobeStock_276261522-800.jpg" alt="Fly fishing scene" fill className="object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="aspect-square relative rounded-xl overflow-hidden">
+              <Image src="/images/optimized/AdobeStock_370869805-800.jpg" alt="Salmon fishing" fill className="object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="aspect-square relative rounded-xl overflow-hidden">
+              <Image src="/images/optimized/AdobeStock_372181001-800.jpg" alt="Trout fishing" fill className="object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div className="aspect-square relative rounded-xl overflow-hidden">
+              <Image src="/images/optimized/AdobeStock_614780292-800.jpg" alt="Fishing scene" fill className="object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── JOIN CTA ── */}
-      <section className="py-28 bg-white dark:bg-stone-950 transition-colors duration-300">
-        <div className="max-w-2xl mx-auto px-4 text-center">
+      <section className="py-28 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/optimized/AdobeStock_963552908-1920.jpg"
+            alt="Fly fishing background"
+            fill
+            className="object-cover opacity-20 dark:opacity-10"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#f5f3ef] via-[#f5f3ef]/90 to-[#f5f3ef] dark:from-stone-950 dark:via-stone-950/90 dark:to-stone-950 transition-colors duration-300" />
+        </div>
+        <div className="relative max-w-2xl mx-auto px-4 text-center">
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-stone-900 dark:text-stone-100 mb-4">
             Ready to wade in?
           </h2>
           <p className="text-stone-600 dark:text-stone-400 text-lg mb-8">
             Log your catches, save your honey holes, and join the crew.
           </p>
-          <Link
-            href="/signup"
-            className="inline-block bg-green-700 hover:bg-green-600 text-white font-semibold px-10 py-3.5 rounded transition-all duration-200 hover:shadow-lg hover:shadow-green-900/30 text-lg"
-          >
+          <Link href="/signup" className="inline-block bg-green-700 hover:bg-green-600 text-white font-semibold px-10 py-3.5 rounded transition-all duration-200 hover:shadow-lg hover:shadow-green-900/30 text-lg">
             Create Your Account
           </Link>
         </div>
